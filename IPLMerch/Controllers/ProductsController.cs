@@ -8,14 +8,14 @@ namespace IPLMerch.Controllers;
 [Route("api/products")]
 public class ProductsController
 {
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetProductById(int id)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Product>>> SearchProducts([FromQuery] string? name, [FromQuery] int? type, [FromQuery] string? franchise)
     {
         return new StatusCodeResult(StatusCodes.Status200OK);
     }
-
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> SearchProducts([FromQuery] string? name, [FromQuery] string? type, [FromQuery] string? franchise)
+    
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetProductById(int id)
     {
         return new StatusCodeResult(StatusCodes.Status200OK);
     }
