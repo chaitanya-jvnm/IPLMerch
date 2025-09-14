@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\IPLMerch.props" />
+</Project>

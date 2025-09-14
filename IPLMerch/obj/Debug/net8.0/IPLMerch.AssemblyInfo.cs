@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IPLMerch")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1e023c3e7f5ff3c694196d7896ead2715af447e")]
 [assembly: System.Reflection.AssemblyProductAttribute("IPLMerch")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IPLMerch")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
