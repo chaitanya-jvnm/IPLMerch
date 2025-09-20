@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using IPLMerch.Models;
+using IPLMerch.Application.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IPLMerch.Controllers;
@@ -8,6 +8,7 @@ namespace IPLMerch.Controllers;
 [Route("api/products")]
 public class ProductsController
 {
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> SearchProducts([FromQuery] string? name, [FromQuery] int? type, [FromQuery] string? franchise)
     {

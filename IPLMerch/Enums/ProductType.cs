@@ -4,5 +4,6 @@ public enum ProductType
 {
     Tshirt,
     Cap,
-    SportingGear
+    SportingGear,
+    Other = 99
 }
