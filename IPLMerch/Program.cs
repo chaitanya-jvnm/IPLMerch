@@ -3,6 +3,7 @@ using IPLMerch.Application;
 using IPLMerch.Infrastructure.Data;
 using IPLMerch.Infrastructure.Repositories;
 using IPLMerch.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +26,10 @@ builder.Services.AddCors(options =>
 });
 
 //Adding EF DBCOntext
-// builder.Services.AddDbContext<IPLShopDbContext>(options =>
-//     options.UseSqlite("Data Source=iplecommerce.db"));
+builder.Services.AddDbContext<IPLShopDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -40,7 +43,10 @@ builder.Services.AddScoped<IProductService, ProductService>();
 // builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Register AutoMapper
-// builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(cfg => 
+{
+    cfg.AddProfile<MappingProfile>();
+});
 
 var app = builder.Build();
 
