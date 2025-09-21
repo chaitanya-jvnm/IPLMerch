@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { Search, ShoppingCart, Package, History, X, Plus, Minus, Filter } from 'lucide-react';
 
 // API Configuration
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:5191/api';
 const USER_ID = '99999999-9999-9999-9999-999999999999';
 
 // API Service
@@ -169,13 +169,13 @@ const ProductCard = ({ product, onAddToCart }) => {
 
 // Cart Sidebar Component
 const CartSidebar = ({ isOpen, onClose }) => {
-  const { cart, updateCartItem, removeFromCart } = useCart();
+  const { cart, updateCartItem, removeFromCart, fetchCart } = useCart();
   const [creatingOrder, setCreatingOrder] = useState(false);
 
   const handleCheckout = async () => {
     setCreatingOrder(true);
     try {
-      await api.post('/orders', {
+      await api.post('/order', {
         shippingAddress: '123 Main St, Mumbai, India',
         billingAddress: '123 Main St, Mumbai, India'
       });
@@ -394,7 +394,7 @@ const OrderHistoryPage = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const data = await api.get('/orders');
+      const data = await api.get('/order');
       setOrders(data);
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -538,4 +538,3 @@ export default function App() {
     </CartProvider>
   );
 }
-                
