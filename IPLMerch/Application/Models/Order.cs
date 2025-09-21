@@ -1,13 +1,15 @@
-﻿using IPLMerch.Enums;
+﻿using IPLMerch.Application.DTOs;
+using IPLMerch.Enums;
 
 namespace IPLMerch.Application.Models;
 
 public class Order : BaseEntity
 {
     /// <summary>
-    /// Easy to track string for order identification by users
+    /// Tracking Information for the Order
     /// </summary>
-    public string OrderNumber { get; set; }
+    public Guid OrderNumber { get; set; }
+
     public Guid UserId { get; set; }
     public decimal TotalAmount { get; set; }
     public OrderStatus Status { get; set; }
@@ -17,5 +19,5 @@ public class Order : BaseEntity
     public DateTime? DeliveredDate { get; set; }
     
     public User User { get; set; }
-    public ICollection<Product> Items { get; set; }
+    public ICollection<CartItem> Items { get; set; }
 }

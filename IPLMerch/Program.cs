@@ -27,9 +27,7 @@ builder.Services.AddCors(options =>
 
 //Adding EF DBCOntext
 builder.Services.AddDbContext<IPLShopDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        sqlOptions => sqlOptions.EnableRetryOnFailure()));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -40,7 +38,7 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 // Register services
 builder.Services.AddScoped<IProductService, ProductService>();
 // builder.Services.AddScoped<ICartService, CartService>();
-// builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Register AutoMapper
 builder.Services.AddAutoMapper(cfg => 

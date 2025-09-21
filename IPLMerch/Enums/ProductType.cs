@@ -2,8 +2,9 @@
 
 public enum ProductType
 {
-    Tshirt,
+    Jersey,
     Cap,
+    Flag,
     SportingGear,
     Other = 99
 }

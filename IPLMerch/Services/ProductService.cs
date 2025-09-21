@@ -23,7 +23,7 @@ public class ProductService : IProductService
         return _mapper.Map<IEnumerable<ProductDto>>(products);
     }
 
-    public async Task<ProductDto> GetProductByIdAsync(Guid id)
+    public async Task<ProductDto?> GetProductByIdAsync(Guid id)
     {
         var product = await _productRepository.GetProductWithFranchiseAsync(id);
         return _mapper.Map<ProductDto>(product);

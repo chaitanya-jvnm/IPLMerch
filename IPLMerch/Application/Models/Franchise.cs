@@ -18,11 +18,6 @@ public class Franchise : BaseEntity
     public string City { get; set; }
     
     /// <summary>
-    /// The CDN url of the Logo png
-    /// </summary>
-    public string LogoUrl { get; set; }
-    
-    /// <summary>
     /// The Products they offer
     /// </summary>
     public IEnumerable<Product> Products { get; set; }

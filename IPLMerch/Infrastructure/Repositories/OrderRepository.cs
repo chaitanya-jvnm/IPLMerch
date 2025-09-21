@@ -10,11 +10,13 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
     {
     }
 
-    public async Task<IQueryable<Order>> GetOrdersByUserIdAsync(Guid userId)
+    public async Task<IQueryable<Order>> GetOrdersByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
     {
-        return await Task.Run(() => _dbSet.Include(o => o.Items).ThenInclude(p => p.Franchise)
+        return await Task.Run(() => _dbSet.Include(o => o.Items)
+            .ThenInclude(p => p.Product)
+            .ThenInclude(p => p.Franchise)
             .Where(o => o.UserId == userId)
             .OrderByDescending(o => o.CreatedAt)
-            .AsQueryable());
+            .AsQueryable(), cancellationToken);
     }
 }

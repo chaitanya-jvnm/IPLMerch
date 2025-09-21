@@ -2,7 +2,7 @@
 
 namespace IPLMerch.Infrastructure.Repositories;
 
-public interface IOrderRepository
+public interface IOrderRepository : IGenericRepository<Order>
 {
-    public Task<IQueryable<Order>> GetOrdersByUserIdAsync(Guid userId);
+    public Task<IQueryable<Order>> GetOrdersByUserIdAsync(Guid userId, CancellationToken cancellationToken = default);
 }
