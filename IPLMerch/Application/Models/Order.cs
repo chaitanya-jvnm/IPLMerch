@@ -1,5 +1,4 @@
-﻿using IPLMerch.Application.DTOs;
-using IPLMerch.Enums;
+﻿using IPLMerch.Enums;
 
 namespace IPLMerch.Application.Models;
 

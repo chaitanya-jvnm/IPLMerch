@@ -1,4 +1,3 @@
-using AutoMapper;
 using IPLMerch.Application;
 using IPLMerch.Infrastructure.Data;
 using IPLMerch.Infrastructure.Repositories;

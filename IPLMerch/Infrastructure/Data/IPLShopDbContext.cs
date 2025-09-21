@@ -97,10 +97,10 @@ public class IPLShopDbContext : DbContext
         //         .WithMany(p => p.OrderItems)
         //         .HasForeignKey(e => e.ProductId);
         // });
-        
+
         // Seed Data
         SeedData(modelBuilder);
-        
+
         base.OnModelCreating(modelBuilder);
     }
 
@@ -127,71 +127,104 @@ public class IPLShopDbContext : DbContext
     }
 
     private static void SeedData(ModelBuilder modelBuilder)
+    {
+        // Seed Franchises
+        var franchises = new[]
         {
-            var franchises = new[]
+            new Franchise
             {
-                new Franchise { Id = Guid.Parse("11111111-1111-1111-1111-111111111111"), Name = "Mumbai Indians", Code = "MI", City = "Mumbai" },
-                new Franchise { Id = Guid.Parse("22222222-2222-2222-2222-222222222222"), Name = "Chennai Super Kings", Code = "CSK", City = "Chennai" },
-                new Franchise { Id = Guid.Parse("33333333-3333-3333-3333-333333333333"), Name = "Royal Challengers Bangalore", Code = "RCB", City = "Bangalore"},
-                new Franchise { Id = Guid.Parse("44444444-4444-4444-4444-444444444444"), Name = "Kolkata Knight Riders", Code = "KKR", City = "Kolkata" }
-            };
-
-            modelBuilder.Entity<Franchise>().HasData(franchises);
-
-            var productId = 1;
-            var products = franchises.SelectMany(f => new[]
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111111"), Name = "Mumbai Indians", Code = "MI",
+                City = "Mumbai"
+            },
+            new Franchise
             {
-                new Product 
-                { 
-                    Id = Guid.NewGuid(), 
-                    Name = $"{f.Name} Official Jersey 2024", 
-                    Type = ProductType.Jersey, 
-                    Price = 2999, 
-                    FranchiseId = f.Id, 
-                    SKU = $"{f.Code}-JER-{productId++:D4}",
-                    StockQuantity = 100,
-                    IsAvailable = true,
-                    Description = $"Official {f.Name} jersey for IPL 2024 season"
-                },
-                new Product 
-                { 
-                    Id = Guid.NewGuid(), 
-                    Name = $"{f.Name} Team Cap", 
-                    Type = ProductType.Cap, 
-                    Price = 499, 
-                    FranchiseId = f.Id, 
-                    SKU = $"{f.Code}-CAP-{productId++:D4}",
-                    StockQuantity = 200,
-                    IsAvailable = true,
-                    Description = $"Official {f.Name} team cap with logo"
-                },
-                new Product 
-                { 
-                    Id = Guid.NewGuid(), 
-                    Name = $"{f.Name} Victory Flag", 
-                    Type = ProductType.Flag, 
-                    Price = 299, 
-                    FranchiseId = f.Id, 
-                    SKU = $"{f.Code}-FLG-{productId++:D4}",
-                    StockQuantity = 150,
-                    IsAvailable = true,
-                    Description = $"{f.Name} team flag for true fans"
-                },
-                new Product 
-                { 
-                    Id = Guid.NewGuid(), 
-                    Name = $"{f.Name} Captain Autographed Photo", 
-                    Type = ProductType.SportingGear, 
-                    Price = 4999, 
-                    FranchiseId = f.Id, 
-                    SKU = $"{f.Code}-APH-{productId++:D4}",
-                    StockQuantity = 10,
-                    IsAvailable = true,
-                    IsAutographed = true,
-                    Description = $"Autographed photo of {f.Name} captain"
-                }
-            });
+                Id = Guid.Parse("22222222-2222-2222-2222-222222222222"), Name = "Chennai Super Kings", Code = "CSK",
+                City = "Chennai"
+            },
+            new Franchise
+            {
+                Id = Guid.Parse("33333333-3333-3333-3333-333333333333"), Name = "Royal Challengers Bangalore",
+                Code = "RCB", City = "Bangalore"
+            },
+            new Franchise
+            {
+                Id = Guid.Parse("44444444-4444-4444-4444-444444444444"), Name = "Kolkata Knight Riders", Code = "KKR",
+                City = "Kolkata"
+            }
+        };
 
-            modelBuilder.Entity<Product>().HasData(products);
-        }
+        modelBuilder.Entity<Franchise>().HasData(franchises);
+
+        // Seed Products
+        var productId = 1;
+        var products = franchises.SelectMany(f => new[]
+        {
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = $"{f.Name} Official Jersey 2024",
+                Type = ProductType.Jersey,
+                Price = 2999,
+                FranchiseId = f.Id,
+                SKU = $"{f.Code}-JER-{productId++:D4}",
+                StockQuantity = 100,
+                IsAvailable = true,
+                Description = $"Official {f.Name} jersey for IPL 2024 season"
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = $"{f.Name} Team Cap",
+                Type = ProductType.Cap,
+                Price = 499,
+                FranchiseId = f.Id,
+                SKU = $"{f.Code}-CAP-{productId++:D4}",
+                StockQuantity = 200,
+                IsAvailable = true,
+                Description = $"Official {f.Name} team cap with logo"
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = $"{f.Name} Victory Flag",
+                Type = ProductType.Flag,
+                Price = 299,
+                FranchiseId = f.Id,
+                SKU = $"{f.Code}-FLG-{productId++:D4}",
+                StockQuantity = 150,
+                IsAvailable = true,
+                Description = $"{f.Name} team flag for true fans"
+            },
+            new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = $"{f.Name} Captain Autographed Photo",
+                Type = ProductType.SportingGear,
+                Price = 4999,
+                FranchiseId = f.Id,
+                SKU = $"{f.Code}-APH-{productId++:D4}",
+                StockQuantity = 10,
+                IsAvailable = true,
+                IsAutographed = true,
+                Description = $"Autographed photo of {f.Name} captain"
+            }
+        });
+
+        modelBuilder.Entity<Product>().HasData(products);
+
+        // Seed Users
+        var users = new[]
+        {
+            new User
+            {
+                Id = Guid.Parse("99999999-9999-9999-9999-999999999999"),
+                FirstName = "Default",
+                LastName = "User",
+                Email = "defaultuser@email.com",
+                PhoneNumber = "9999999999"
+            }
+        };
+
+        modelBuilder.Entity<User>().HasData(users);
+    }
 }

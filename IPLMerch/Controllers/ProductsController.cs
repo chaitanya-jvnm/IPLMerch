@@ -1,29 +1,36 @@
-﻿using System.Net;
-using IPLMerch.Application.Models;
+﻿using IPLMerch.Application.DTOs;
+using IPLMerch.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IPLMerch.Controllers;
 
 [ApiController]
-[Route("api/products")]
-public class ProductsController
+[Route("api/[controller]")]
+public class ProductsController : ControllerBase
 {
-    
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> SearchProducts([FromQuery] string? name, [FromQuery] int? type, [FromQuery] string? franchise)
+    private readonly IProductService _productService;
+
+    public ProductsController(IProductService productService)
     {
-        return new StatusCodeResult(StatusCodes.Status200OK);
+        _productService = productService;
+    }
+    
+    [HttpPost("search")]
+    public async Task<IActionResult> SearchProducts([FromBody] SearchProductsDto searchDto)
+    {
+        var products = await _productService.SearchProductsAsync(searchDto);
+        return Ok(products);
     }
     
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetProductById(int id)
+    public async Task<IActionResult> GetProductById(Guid id)
     {
-        return new StatusCodeResult(StatusCodes.Status200OK);
+        var product = await _productService.GetProductByIdAsync(id);
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return Ok(product);
     }
-
-    [HttpPut]
-    public async Task<IActionResult> AddProduct(Product product)
-    {
-        return new StatusCodeResult(StatusCodes.Status200OK);
-    }
+    
 }
