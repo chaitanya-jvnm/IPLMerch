@@ -31,12 +31,13 @@ builder.Services.AddDbContext<IPLShopDbContext>(options =>
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-// builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 // Register services
 builder.Services.AddScoped<IProductService, ProductService>();
-// builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IFranchiseService, FranchiseService>();
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Register AutoMapper
@@ -61,7 +62,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();

@@ -14,6 +14,14 @@ public class ProductsController : ControllerBase
     {
         _productService = productService;
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetProducts()
+    {
+        var products = await _productService.GetAllProductsAsync();
+        if(products.Any()) return Ok(products);
+        return NoContent();
+    }
     
     [HttpPost("search")]
     public async Task<IActionResult> SearchProducts([FromBody] SearchProductsDto searchDto)
