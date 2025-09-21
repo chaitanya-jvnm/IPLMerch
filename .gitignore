@@ -2,6 +2,17 @@
 .idea/
 *.sln.iml
 
+# React Frontend
+Frontend/node_modules/
+Frontend/build/
+Frontend/.env.local
+Frontend/.env.development.local
+Frontend/.env.test.local
+Frontend/.env.production.local
+Frontend/npm-debug.log*
+Frontend/yarn-debug.log*
+Frontend/yarn-error.log*
+
 # User-specific files
 *.rsuser
 *.suo

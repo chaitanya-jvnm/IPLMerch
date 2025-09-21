@@ -128,6 +128,21 @@ public class IPLShopDbContext : DbContext
 
     private static void SeedData(ModelBuilder modelBuilder)
     {
+        // Seed Users
+        var users = new[]
+        {
+            new User
+            {
+                Id = Guid.Parse("99999999-9999-9999-9999-999999999999"),
+                FirstName = "Default",
+                LastName = "User",
+                Email = "defaultuser@email.com",
+                PhoneNumber = "9999999999"
+            }
+        };
+
+        modelBuilder.Entity<User>().HasData(users);
+        
         // Seed Franchises
         var franchises = new[]
         {
@@ -211,20 +226,5 @@ public class IPLShopDbContext : DbContext
         });
 
         modelBuilder.Entity<Product>().HasData(products);
-
-        // Seed Users
-        var users = new[]
-        {
-            new User
-            {
-                Id = Guid.Parse("99999999-9999-9999-9999-999999999999"),
-                FirstName = "Default",
-                LastName = "User",
-                Email = "defaultuser@email.com",
-                PhoneNumber = "9999999999"
-            }
-        };
-
-        modelBuilder.Entity<User>().HasData(users);
     }
 }
