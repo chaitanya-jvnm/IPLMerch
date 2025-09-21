@@ -1,6 +1,6 @@
 ﻿using IPLMerch.Application.DTOs;
 
-namespace IPLMerch.Services;
+namespace IPLMerch.Services.CoreServices;
 
 public interface ICartService
 {

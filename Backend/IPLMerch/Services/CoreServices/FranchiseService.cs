@@ -1,7 +1,7 @@
 ﻿using IPLMerch.Application.Models;
 using IPLMerch.Infrastructure.Repositories;
 
-namespace IPLMerch.Services;
+namespace IPLMerch.Services.CoreServices;
 
 public class FranchiseService : IFranchiseService
 {

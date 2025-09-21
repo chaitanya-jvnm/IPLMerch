@@ -1,8 +1,6 @@
 using IPLMerch.Application;
+using IPLMerch.Helpers;
 using IPLMerch.Infrastructure.Data;
-using IPLMerch.Infrastructure.Repositories;
-using IPLMerch.Services;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,21 +22,10 @@ builder.Services.AddCors(options =>
         });
 });
 
-//Adding EF DBCOntext
-builder.Services.AddDbContext<IPLShopDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Register repositories
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<ICartRepository, CartRepository>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-
-// Register services
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IFranchiseService, FranchiseService>();
-builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services
+    .ConfigureDbContext(builder.Configuration)
+    .RegisterRepositories()
+    .RegisterServices();
 
 // Register AutoMapper
 builder.Services.AddAutoMapper(cfg => 

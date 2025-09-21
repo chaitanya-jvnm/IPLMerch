@@ -4,7 +4,7 @@ using IPLMerch.Application.Models;
 using IPLMerch.Enums;
 using IPLMerch.Infrastructure.Repositories;
 
-namespace IPLMerch.Services;
+namespace IPLMerch.Services.CoreServices;
 
 public class OrderService : IOrderService
 {

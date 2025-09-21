@@ -1,6 +1,6 @@
 ﻿using IPLMerch.Application.Models;
 
-namespace IPLMerch.Services;
+namespace IPLMerch.Services.CoreServices;
 
 public interface IFranchiseService
 {

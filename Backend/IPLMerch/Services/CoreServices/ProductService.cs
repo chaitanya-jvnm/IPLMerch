@@ -3,7 +3,7 @@ using IPLMerch.Application.DTOs;
 using IPLMerch.Enums;
 using IPLMerch.Infrastructure.Repositories;
 
-namespace IPLMerch.Services;
+namespace IPLMerch.Services.CoreServices;
 
 public class ProductService : IProductService
 {
