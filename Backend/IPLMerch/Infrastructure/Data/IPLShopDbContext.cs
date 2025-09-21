@@ -213,7 +213,7 @@ public class IPLShopDbContext : DbContext
             new Product
             {
                 Id = Guid.NewGuid(),
-                Name = $"{f.Name} Captain Autographed Photo",
+                Name = $"{f.Name} Captain's Bat",
                 Type = ProductType.SportingGear,
                 Price = 4999,
                 FranchiseId = f.Id,
@@ -221,7 +221,7 @@ public class IPLShopDbContext : DbContext
                 StockQuantity = 10,
                 IsAvailable = true,
                 IsAutographed = true,
-                Description = $"Autographed photo of {f.Name} captain"
+                Description = $"Bat of {f.Name} captain"
             }
         });
 

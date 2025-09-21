@@ -175,7 +175,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
   const handleCheckout = async () => {
     setCreatingOrder(true);
     try {
-      await api.post('/order', {
+      await api.post('/orders', {
         shippingAddress: '123 Main St, Mumbai, India',
         billingAddress: '123 Main St, Mumbai, India'
       });
@@ -252,15 +252,23 @@ const ProductListPage = () => {
   const [selectedType, setSelectedType] = useState('');
   const { addToCart } = useCart();
 
+  // normalize API response to an array
+  const normalizeProducts = (data) => {
+    if (!data) return [];
+    if (Array.isArray(data)) return data;
+    // common paged shape: { items: [...], total: 123 }
+    if (Array.isArray(data.items)) return data.items;
+    // fallback: if API returns an object keyed by id, convert to array
+    if (typeof data === 'object') return Object.values(data);
+    return [];
+  };
+
   const productTypes = [
     { value: '', label: 'All Types' },
     { value: 'Jersey', label: 'Jersey' },
     { value: 'Cap', label: 'Cap' },
     { value: 'Flag', label: 'Flag' },
-    { value: 'AutographedPhoto', label: 'Autographed Photo' },
-    { value: 'Keychain', label: 'Keychain' },
-    { value: 'Mug', label: 'Mug' },
-    { value: 'Poster', label: 'Poster' }
+    { value: 'SportingGear', label: 'Sporting Gear' }
   ];
 
   useEffect(() => {
@@ -298,7 +306,7 @@ const ProductListPage = () => {
         productType: selectedType || null
       };
       const data = await api.post('/products/search', searchData);
-      setProducts(data);
+      setProducts(normalizeProducts(data));
     } catch (error) {
       console.error('Error searching products:', error);
     } finally {
@@ -394,7 +402,7 @@ const OrderHistoryPage = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const data = await api.get('/order');
+      const data = await api.get('/orders');
       setOrders(data);
     } catch (error) {
       console.error('Error fetching orders:', error);

@@ -6,11 +6,11 @@ namespace IPLMerch.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class OrderController : ControllerBase
+public class OrdersController : ControllerBase
 {
     private readonly IOrderService _orderService;
 
-    public OrderController(IOrderService orderService)
+    public OrdersController(IOrderService orderService)
     {
         _orderService = orderService;
     }
@@ -23,9 +23,9 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateOrder(List<CartItemDto> cartItems, string address)
+    public async Task<IActionResult> CreateOrder(CreateOrderDto address)
     {
-        var order = await _orderService.CreateOrderAsync(GetUserId(), cartItems, address);
+        var order = await _orderService.CreateOrderAsync(GetUserId(), address);
         return Created(order.OrderNumber, order);
     }
 
