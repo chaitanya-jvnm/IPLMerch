@@ -17,4 +17,5 @@ public class Product : BaseEntity
         
     public Franchise Franchise { get; set; }
     public ICollection<CartItem> CartItems { get; set; }
+    public ICollection<OrderItem> OrderItems { get; set; }
 }

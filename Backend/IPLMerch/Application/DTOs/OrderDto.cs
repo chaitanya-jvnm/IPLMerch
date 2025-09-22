@@ -11,7 +11,7 @@ public class OrderDto
     public DateTime CreatedAt { get; set; }
     public DateTime? ShippedDate { get; set; }
     public DateTime? DeliveredDate { get; set; }
-    public List<ProductDto> Items { get; set; }
+    public List<OrderItemDto> Items { get; set; }
 }
 
 public class OrderItemDto

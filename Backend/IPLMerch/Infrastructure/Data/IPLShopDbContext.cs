@@ -17,6 +17,7 @@ public class IPLShopDbContext : DbContext
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
     public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -85,18 +86,18 @@ public class IPLShopDbContext : DbContext
         });
 
         // OrderItem configuration
-        // modelBuilder.Entity<OrderItem>(entity =>
-        // {
-        //     entity.HasKey(e => e.Id);
-        //     entity.Property(e => e.UnitPrice).HasPrecision(18, 2);
-        //     entity.Property(e => e.TotalPrice).HasPrecision(18, 2);
-        //     entity.HasOne(e => e.Order)
-        //         .WithMany(o => o.Items)
-        //         .HasForeignKey(e => e.OrderId);
-        //     entity.HasOne(e => e.Product)
-        //         .WithMany(p => p.OrderItems)
-        //         .HasForeignKey(e => e.ProductId);
-        // });
+        modelBuilder.Entity<OrderItem>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.UnitPrice).HasPrecision(18, 2);
+            entity.Property(e => e.TotalPrice).HasPrecision(18, 2);
+            entity.HasOne(e => e.Order)
+                .WithMany(o => o.Items)
+                .HasForeignKey(e => e.OrderId);
+            entity.HasOne(e => e.Product)
+                .WithMany(p => p.OrderItems)
+                .HasForeignKey(e => e.ProductId);
+        });
 
         // Seed Data
         SeedData(modelBuilder);

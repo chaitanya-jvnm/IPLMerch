@@ -20,5 +20,7 @@ public class MappingProfile : Profile
             
         CreateMap<Order, OrderDto>()
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+        
+        CreateMap<OrderItem, OrderItemDto>();
     }
 }

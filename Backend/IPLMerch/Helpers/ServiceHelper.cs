@@ -19,8 +19,7 @@ public static class ServiceHelper
         return services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
             .AddScoped<IProductRepository, ProductRepository>()
             .AddScoped<ICartRepository, CartRepository>()
-            .AddScoped<IOrderRepository, OrderRepository>()
-            .AddLoggingDecorators();
+            .AddScoped<IOrderRepository, OrderRepository>();
     }
 
     /// <summary>
@@ -34,7 +33,8 @@ public static class ServiceHelper
         return services.AddScoped<IProductService, ProductService>()
             .AddScoped<IFranchiseService, FranchiseService>()
             .AddScoped<ICartService, CartService>()
-            .AddScoped<IOrderService, OrderService>();
+            .AddScoped<IOrderService, OrderService>()
+            .AddLoggingDecorators();
     }
 
     /// <summary>
