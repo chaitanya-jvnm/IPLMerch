@@ -45,7 +45,7 @@ public class ProductLogger : IProductService
 
         try
         {
-            var result = await _productService.GetAllProductsAsync();
+            var result = await _productService.SearchProductsAsync(searchDto);
             var count = result?.Count() ?? 0;
             _logger.LogInformation("GetAllProductsAsync completed in {ElapsedMs}ms. Count: {Count}",
                 stopwatch.ElapsedMilliseconds, count);
